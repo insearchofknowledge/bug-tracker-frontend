@@ -1,0 +1,19 @@
+<h5>{{listName}}</h5>
+<table class=" table table-sm table-hover table-striped table-responsive" *ngIf="tickets">
+    <thead>
+        <tr class="table-success">
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Created</th>
+            <th scope="col">Author</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let ticket of tickets" (click)="ticketClicked(ticket)">
+            <th scope="row">{{ticket.title}}</th>
+            <th scope="row">{{ticket.description}}</th>
+            <th scope="row">{{ticket.dateCreated}}</th>
+            <th scope="row">{{ticket.author.firstName}} {{ticket.author.lastName}}</th>
+        </tr>
+    </tbody>
+</table>

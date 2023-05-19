@@ -1,0 +1,21 @@
+<h5>Team</h5>
+<table class="table table-responsive table-sm table-hover">
+    <thead>
+        <tr class="table-success">
+            <!-- <th scope="col">#</th> -->
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let developer of developers">
+            <!-- <th scope="row">{{developer.id}}</th> -->
+            <th scope="row">{{developer.firstName}}</th>
+            <th scope="row">{{developer.lastName}}</th>
+            <th scope="row">{{developer.email}}</th>
+            <!-- <th scope="row">{{developer.phone}}</th> -->
+        </tr>
+    </tbody>
+</table>

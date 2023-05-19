@@ -1,0 +1,63 @@
+<h5>Selected Ticket Details</h5>
+<div *ngIf="noTicketSelected">No ticket selected.</div>
+<div class="container" *ngIf="ticket">
+    <!--The row of the entire details(comments included)-->
+    <div class="row">
+        <!--Ticket details without comments (left side)-->
+        <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6">
+            <!--First row-->
+            <div class="row">
+                <div class="col-3">
+                    <p class="head">Title</p>
+                    <p class="info">{{ticket.title}}</p>
+                </div>
+                <div class="col-3">
+                    <p class="head">Author</p>
+                    <p class="info">{{ticket.author.firstName}} {{ticket.author.lastName}}</p>
+                </div>
+                <div class="col-6">
+                    <p class="head">Description</p>
+                    <p class="info">{{ticket.description}}</p>
+                </div>
+            </div>
+            <!--Second row-->
+            <div class="row">
+                <div class="col">
+                    <p class="head">Type</p>
+                    <p class="info">{{ticket.typeOfTicket}}</p>
+                </div>
+                <div class="col">
+                    <p class="head">Id</p>
+                    <p class="info">{{ticket.id}}</p>
+                </div>
+                <div class="col">
+                    <p class="head">Priority</p>
+                    <p class="info">{{ticket.ticketPriority}}</p>
+                </div>
+                <div class="col">
+                    <p class="head">Status</p>
+                    <p class="info">{{ticket.ticketStatus}}</p>
+                </div>
+                <div class="col">
+                    <p class="head">Created</p>
+                    <p class="info">{{ticket.dateCreated}}</p>
+                </div>
+                <div class="col">
+                    <p class="head">Modified</p>
+                    <p class="info">{{ticket.lastDateModified}}</p>
+                </div>
+            </div>
+<hr>
+            <!--Developers assigned to ticket-->
+            <div class="row">
+                <p class="h6">Devs Assigned</p>
+                <div class="col" *ngFor="let developer of ticket.devsAssigned">{{developer.firstName}} {{developer.lastName}}</div>
+            </div>
+            <hr> 
+        </div>       
+        <!--Comments of ticket details (right side)-->
+        <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6">
+            <app-comment-list [comments]="ticket.comments"></app-comment-list>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div *ngIf="errorMessage">
+    <app-error [message]="errorMessage"></app-error>
+</div>
+
+<div *ngIf="myProjects">
+<h3>My Projects:</h3>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">Deadline</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let project of myProjects" [routerLink]="['/projectDetails', project.id]" >
+            <th scope="row">{{project.id}}</th>
+            <th>{{project.name}}</th>
+            <th>{{project.description}}</th>
+            <th>{{project.startDate}}</th>
+            <th>{{project.deadline}}</th>
+        </tr>
+    </tbody>
+</table>
+</div>

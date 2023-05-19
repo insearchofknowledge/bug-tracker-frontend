@@ -1,0 +1,38 @@
+<div class="container">
+    <h5>Comments</h5>
+
+    <div *ngFor="let comment of comments">
+        <div class="author-date">
+            <p class="">{{comment.commentAuthor.firstName}} {{comment.commentAuthor.lastName}}</p> 
+            <p>{{comment.datePosted | date: 'MMM d, y, h:mm a'}}</p>
+        </div>
+        <div class="comment-text">
+            <p>{{comment.content}}</p>
+        </div>
+       <hr>
+    </div>
+<!-- 
+    <ul>
+        <li *ngFor="let comment of comments">
+          <div class="author-date">
+            <p>{{comment.commentAuthor.firstName}} {{comment.commentAuthor.lastName}}</p>
+            <p>{{ comment.datePosted | date: 'MMM d, y, h:mm a' }}</p>
+          </div>
+          <div class="comment-text">
+            <p>{{ comment.content }}</p>
+          </div>
+        </li>
+      </ul> -->
+    
+      <form class="form-inline">
+        <div class="row">
+          <div class="col">
+            <input class="form-control" type="text" placeholder="New Comment">
+          </div>
+          <div class="col-auto">
+            <button class="btn btn-success">Submit</button>
+          </div>
+        </div>
+      </form>
+</div>
+

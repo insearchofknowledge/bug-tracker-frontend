@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+}
+
+.row {
+    margin-bottom: 35px;
+}
+
+.col {
+    margin:10px;
+}
+
+h2 {
+    margin-bottom: 30px
+}
+
+h3, h4 {
+    margin-bottom: 25px;
+}
+
+h3 {
+    margin-top: 15px;
+}
+
+div.container {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 0px;
+}
+
+hr {
+    color:#198754
+}
