@@ -3,7 +3,7 @@
 }
 
 .row {
-    margin-bottom: 35px;
+    margin-bottom: 30px;
 }
 
 .col {
@@ -30,4 +30,12 @@ div.container {
 
 hr {
     color:#198754
+}
+
+.firstRow{
+    margin-bottom: 0px;
+}
+
+#noTopMargin {
+    margin-top: 0px;
 }

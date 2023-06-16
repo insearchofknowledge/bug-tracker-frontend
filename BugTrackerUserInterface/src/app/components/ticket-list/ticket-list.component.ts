@@ -13,6 +13,7 @@ export class TicketListComponent implements OnInit {
   // it takes data from components we include this one in
   @Input() tickets: TicketSimplified[];
   @Input() listName: String = "Tickets";
+  @Input() public displayAddButton: boolean = false;
   public context: String;
 
   constructor(

@@ -1,5 +1,21 @@
 <div class="container">
     <h4>Project Details - {{project.name}} | Deadline: {{project.deadline | date}}</h4>
+    
+    <div class="container">
+        <div class="row firstRow">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                <h5>Description</h5>
+                <p>{{project.description}}</p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <h5>Starting Date</h5>
+                <p>{{project.startDate}}</p>
+            </div>
+        </div>
+    </div>
+
+    <hr id="noTopMargin">
+
     <div class="row">
         <!--Developers list (Team)-->
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -7,7 +23,7 @@
         </div>
         <!--Tickets list-->
         <div class="col-sx-12 col-sm-12 col-md-8 col-lg-8">
-            <app-ticket-list [tickets] = "project?.tickets"></app-ticket-list>
+            <app-ticket-list [tickets] = "project?.tickets" [displayAddButton] = true></app-ticket-list>
         </div>
     </div>
     <hr>

@@ -1,11 +1,16 @@
-<h5>{{listName}}</h5>
-<table class=" table table-sm table-hover table-striped table-responsive" *ngIf="tickets">
+<div class="container" id="titleWithButton">
+    <h5>{{listName}}</h5> 
+    <button class="btn btn-sm btn-success" *ngIf="displayAddButton">Add Ticket</button>
+</div>
+
+<table class="table table-sm table-hover table-striped table-responsive" *ngIf="tickets">
     <thead>
         <tr class="table-success">
             <th scope="col">Title</th>
             <th scope="col">Description</th>
             <th scope="col">Created</th>
             <th scope="col">Author</th>
+            <th scope="col">Edit</th>
         </tr>
     </thead>
     <tbody>
@@ -14,6 +19,7 @@
             <th scope="row">{{ticket.description}}</th>
             <th scope="row">{{ticket.dateCreated}}</th>
             <th scope="row">{{ticket.author.firstName}} {{ticket.author.lastName}}</th>
+            <th scope="row"><a><i class="fa fa-pencil fa-lg"></i></a></th>
         </tr>
     </tbody>
 </table>
