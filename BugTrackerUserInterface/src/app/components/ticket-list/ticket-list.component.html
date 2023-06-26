@@ -1,6 +1,6 @@
 <div class="container" id="titleWithButton">
     <h5>{{listName}}</h5> 
-    <button class="btn btn-sm btn-success" *ngIf="displayAddButton">Add Ticket</button>
+    <button class="btn btn-sm btn-success" *ngIf="displayAddButton" (click)="togglePopup()">Add Ticket</button>
 </div>
 
 <table class="table table-sm table-hover table-striped table-responsive" *ngIf="tickets">
@@ -23,3 +23,13 @@
         </tr>
     </tbody>
 </table>
+
+<!-- Add new ticket popup form: -->
+<div class="popup-container" *ngIf="showPopup">
+    <div class="popup-content">
+        <app-create-ticket-form [projectId]="projectId"
+                                [projectTeam]="projectTeam" 
+                                (newTicketResponse)="onTicketAdded($event)"
+                                (onClose)="togglePopup()"></app-create-ticket-form>
+    </div>
+</div>

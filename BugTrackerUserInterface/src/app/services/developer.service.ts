@@ -13,7 +13,7 @@ export class DeveloperService {
 
   constructor(private httpClient: HttpClient) { }
 
-  fetchDeveloperById(developerId: String): Observable<DeveloperDetailed> {
-    return this.httpClient.get<DeveloperDetailed>(`${this.apiServerUrl}/api/developers/${developerId}`);
+  fetchDeveloperById(): Observable<DeveloperDetailed> {
+    return this.httpClient.get<DeveloperDetailed>(`${this.apiServerUrl}/api/developers/profile`);
   }
 }

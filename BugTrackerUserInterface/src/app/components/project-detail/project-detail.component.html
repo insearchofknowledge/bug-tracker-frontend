@@ -23,7 +23,10 @@
         </div>
         <!--Tickets list-->
         <div class="col-sx-12 col-sm-12 col-md-8 col-lg-8">
-            <app-ticket-list [tickets] = "project?.tickets" [displayAddButton] = true></app-ticket-list>
+            <app-ticket-list [tickets] = "project?.tickets" 
+                             [projectId] = "project.id" 
+                             [projectTeam] = "project.assignedTeam" 
+                             [displayAddButton] = true></app-ticket-list>
         </div>
     </div>
     <hr>

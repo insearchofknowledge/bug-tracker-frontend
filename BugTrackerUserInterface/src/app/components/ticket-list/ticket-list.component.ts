@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DeveloperSimplified } from 'src/app/model/developer/developerSimplified';
 import { TicketSimplified } from 'src/app/model/ticket/ticketSimplified';
 import { SharedService } from 'src/app/services/shared.service';
 
@@ -14,7 +15,13 @@ export class TicketListComponent implements OnInit {
   @Input() tickets: TicketSimplified[];
   @Input() listName: String = "Tickets";
   @Input() public displayAddButton: boolean = false;
+
+  // these inputs come from ProjectDetailComponent (parent) and will be passed on to CreateTicketComponent
+  @Input() projectId: String;
+  @Input() projectTeam: DeveloperSimplified[];
+
   public context: String;
+  showPopup: boolean = false;
 
   constructor(
     private sharedService: SharedService,
@@ -46,4 +53,14 @@ export class TicketListComponent implements OnInit {
         this.router.navigate(['/projectDetails', ticket.project]);
       }
     };
+
+    // Will help make the createTicketForm appear / dissapear
+    togglePopup() {
+      this.showPopup = !this.showPopup;
+    }
+
+    // This will take the @Output event of ticketSimplified from the addTicketForm component and add it to the ticket list
+    onTicketAdded(newTicket: TicketSimplified) {
+      this.tickets.push(newTicket);
+    }
 }

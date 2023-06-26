@@ -22,8 +22,7 @@ export class ProjectServiceService {
     return this.httpClient.get<ProjectSimplified[]>(`${this.apiServerUrl}/api/projects/all`);
   }
 
-  public fetchAllMyProjects(developerId: String): Observable<ProjectSimplified[]> {
-    return this.httpClient.get<ProjectSimplified[]>(`${this.apiServerUrl}/api/projects/myProjects/${developerId}`);
+  public fetchAllMyProjects(): Observable<ProjectSimplified[]> {
+    return this.httpClient.get<ProjectSimplified[]>(`${this.apiServerUrl}/api/projects/myProjects`);
   }
-
 }

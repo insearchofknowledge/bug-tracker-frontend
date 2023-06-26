@@ -16,11 +16,11 @@ export class DeveloperDetailComponent implements OnInit {
   constructor(private developerService: DeveloperService) { }
 
   ngOnInit(): void {
-    this.getDeveloperById("DEV-1");
+    this.getDeveloperById();
   }
 
-  getDeveloperById(developerId: String) {
-    this.developerService.fetchDeveloperById(developerId).subscribe({
+  getDeveloperById() {
+    this.developerService.fetchDeveloperById().subscribe({
       next: (response => this.developer = response),
       error: (errorResponse: HttpErrorResponse ) => {
         this.errorMessage = "An error occured";

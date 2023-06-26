@@ -10,7 +10,6 @@ import { ProjectServiceService } from 'src/app/services/project-service.service'
 })
 export class ProjectListComponent implements OnInit {
 
-  
   public myProjects: ProjectSimplified[];
   public errorMessage: string;
 
@@ -19,11 +18,12 @@ export class ProjectListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getAllMyProjects("DEV-2");
+  //  this.getAllProjects();
+    this.getAllMyProjects();
   }
 
-  public getAllMyProjects(developerId: String): void {
-    this.projectService.fetchAllMyProjects(developerId).subscribe({
+  public getAllMyProjects(): void {
+    this.projectService.fetchAllMyProjects().subscribe({
       next: (response: ProjectSimplified[]) => { 
         this.myProjects = response;
       },
@@ -42,4 +42,23 @@ export class ProjectListComponent implements OnInit {
     });
   }
 
+  public getAllProjects(): void {
+    this.projectService.fetchAllProjects().subscribe({
+      next: (response: ProjectSimplified[]) => { 
+        this.myProjects = response;
+      },
+      error: (errorResponse: HttpErrorResponse) => { 
+        this.errorMessage = "An error occurred";
+       
+        // If a client-side or network error occurred:
+        if (errorResponse.error instanceof ErrorEvent) {
+          this.errorMessage = `Error: ${errorResponse.error.message}`;
+        } else {
+          // If the backend returned an unsuccessful response
+          this.errorMessage = `Error Code: ${errorResponse.status} \nMessage: ` + errorResponse.error; // extract message from errorResponse
+          console.log(this.errorMessage);
+        }
+      }
+    });
+  }
 }

@@ -14,9 +14,13 @@ import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.
 import { DeveloperListComponent } from './components/developer-list/developer-list.component';
 import { DeveloperDetailComponent } from './components/developer-detail/developer-detail.component';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorComponent } from './components/error/error.component';
 import { MyTicketListComponent } from './components/my-ticket-list/my-ticket-list.component';
+import { InterceptorService } from './services/interceptor.service';
+import { LoginComponent } from './components/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateTicketFormComponent } from './components/create-ticket-form/create-ticket-form.component';
 
 @NgModule({
   declarations: [
@@ -33,14 +37,26 @@ import { MyTicketListComponent } from './components/my-ticket-list/my-ticket-lis
     DeveloperDetailComponent,
     CommentListComponent,
     ErrorComponent,
-    MyTicketListComponent
+    MyTicketListComponent,
+    LoginComponent,
+    CreateTicketFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    // interceptor - intercepts all http requests and adds the authorisation header
+    // to each request
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
