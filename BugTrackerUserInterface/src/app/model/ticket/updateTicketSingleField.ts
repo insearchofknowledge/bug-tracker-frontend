@@ -1,4 +1,4 @@
 export class UpdateTicketSingleField {
-    fieldName: String;
+    fieldName: string;
     fieldValue: Object;
 }

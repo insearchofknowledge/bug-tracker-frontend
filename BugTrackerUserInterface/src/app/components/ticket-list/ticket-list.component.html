@@ -1,3 +1,7 @@
+<!-- <div *ngIf="errorMessage">
+    <app-error [message]="errorMessage"></app-error>
+</div> -->
+
 <div class="container" id="titleWithButton">
     <h5>{{listName}}</h5> 
     <button class="btn btn-sm btn-success" *ngIf="displayAddButton" (click)="togglePopup()">Add Ticket</button>
@@ -15,7 +19,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let ticket of tickets" (click)="ticketClicked(ticket)">
-            <th scope="row">{{ticket.title}}</th>
+            <th>{{ticket.title}}</th>
             <th scope="row">{{ticket.description}}</th>
             <th scope="row">{{ticket.dateCreated}}</th>
             <th scope="row">{{ticket.author.firstName}} {{ticket.author.lastName}}</th>

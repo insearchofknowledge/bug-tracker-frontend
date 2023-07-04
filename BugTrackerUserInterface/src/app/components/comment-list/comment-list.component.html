@@ -1,7 +1,7 @@
 <div class="container">
   <h5>Comments</h5>
 
-  <div *ngFor="let comment of comments">
+  <div *ngFor="let comment of sortedComments">
     <div class="author-date">
       <p class="">{{comment.commentAuthor.firstName}} {{comment.commentAuthor.lastName}}</p> 
       <p>{{comment.datePosted | date: 'MMM d, y, h:mm a'}}</p>

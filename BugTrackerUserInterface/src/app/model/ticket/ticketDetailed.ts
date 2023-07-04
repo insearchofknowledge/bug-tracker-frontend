@@ -5,9 +5,9 @@ import { TypeOfTicket } from "./enums/typeOfTicket";
 import { Comment } from "../comment/comment";
 
 export class TicketDetailed {
-    id: String;
-    title: String;
-    description: String;
+    id: string;
+    title: string;
+    description: string;
     dateCreated: Date;
     lastDateModified: Date;
     typeOfTicket: TypeOfTicket;
@@ -15,6 +15,6 @@ export class TicketDetailed {
     ticketStatus: TicketStatus;
     author: DeveloperSimplified;
     devsAssigned: DeveloperSimplified[];
-    project: String;
+    project: string;
     comments: Comment[];
 }

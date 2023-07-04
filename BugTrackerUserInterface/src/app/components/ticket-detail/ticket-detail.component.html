@@ -7,51 +7,68 @@
         <div class="col-sx-12 col-sm-12 col-md-6 col-lg-6">
             <!--First row-->
             <div class="row">
-                <div class="col-3">
-                    <p class="head">Title</p>
-                    <p class="info">{{ticket.title}}</p>
-                </div>
-                <div class="col-3">
-                    <p class="head">Author</p>
-                    <p class="info">{{ticket.author.firstName}} {{ticket.author.lastName}}</p>
-                </div>
-                <div class="col-6">
-                    <p class="head">Description</p>
-                    <p class="info">{{ticket.description}}</p>
-                </div>
-            </div>
-            <!--Second row-->
-            <div class="row">
-                <div class="col">
-                    <p class="head">Type</p>
-                    <p class="info">{{ticket.typeOfTicket}}</p>
-                </div>
                 <div class="col">
                     <p class="head">Id</p>
                     <p class="info">{{ticket.id}}</p>
                 </div>
                 <div class="col">
-                    <p class="head">Priority</p>
-                    <p class="info">{{ticket.ticketPriority}}</p>
+                    <p class="head">Title <a (click)="toggleEditMode('title')"><i class="fa fa-pencil fa-md"></i></a> <button *ngIf="editMode.title" class="btn btn-outline-success btn-sm" (click)="updateSingleField('title')">Update</button></p>
+                    <p class="info" *ngIf="!editMode.title">{{ticket.title}}</p>
+                    <input *ngIf="editMode.title" [ngModel]="ticket.title" (ngModelChange)="updateFieldValue($event)">
                 </div>
                 <div class="col">
-                    <p class="head">Status</p>
-                    <p class="info">{{ticket.ticketStatus}}</p>
+                    <p class="head">Author</p>
+                    <p class="info">{{ticket.author.firstName}} {{ticket.author.lastName}}</p>
                 </div>
                 <div class="col">
                     <p class="head">Created</p>
                     <p class="info">{{ticket.dateCreated}}</p>
                 </div>
                 <div class="col">
-                    <p class="head">Modified</p>
+                    <p class="head">Last Modified</p>
                     <p class="info">{{ticket.lastDateModified}}</p>
+                </div>
+            </div>
+            <!--Second row-->
+            <div class="row">
+                <div class="col-12">
+                        <p class="head">Description <a (click)="toggleEditMode('description')"><i class="fa fa-pencil fa-md"></i></a> <button *ngIf="editMode.description" class="btn btn-outline-success btn-sm" (click)="updateSingleField('description')">Update</button></p>
+                        <p class="info" *ngIf="!editMode.description">{{ticket.description}}</p>         
+                        <textarea class="info" *ngIf="editMode.description" [ngModel]="ticket.description" (ngModelChange)="updateFieldValue($event)"></textarea>
+                </div>
+            </div>
+            <!--Third row-->
+            <div class="row">
+                <div class="col">
+                    <p class="head">Type <a (click)="toggleEditMode('typeOfTicket')"><i class="fa fa-pencil fa-md"></i></a> <button *ngIf="editMode.typeOfTicket" class="btn btn-outline-success btn-sm" (click)="updateSingleField('typeOfTicket')">Update</button></p>
+                    <p class="info" *ngIf="!editMode.typeOfTicket">{{ticket.typeOfTicket}}</p>
+                    <select *ngIf="editMode.typeOfTicket" [ngModel]="ticket.typeOfTicket" (ngModelChange)="updateFieldValue($event)">
+                        <option *ngFor="let type of enumValues(TypeOfTicket)">{{type}}</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <p class="head">Priority <a (click)="toggleEditMode('ticketPriority')"><i class="fa fa-pencil fa-md"></i></a> <button *ngIf="editMode.ticketPriority" class="btn btn-outline-success btn-sm" (click)="updateSingleField('ticketPriority')">Update</button></p>
+                    <p class="info" *ngIf="!editMode.ticketPriority">{{ticket.ticketPriority}}</p>
+                    <select *ngIf="editMode.ticketPriority" [ngModel]="ticket.ticketPriority" (ngModelChange)="updateFieldValue($event)">
+                        <option *ngFor="let priority of enumValues(TicketPriority)">{{priority}}</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <p class="head">Status <a (click)="toggleEditMode('ticketStatus')"><i class="fa fa-pencil fa-md"></i></a> <button *ngIf="editMode.ticketStatus" class="btn btn-outline-success btn-sm" (click)="updateSingleField('ticketStatus')">Update</button></p>
+                    <p class="info" *ngIf="!editMode.ticketStatus">{{ticket.ticketStatus}}</p>
+                    <select *ngIf="editMode.ticketStatus" [ngModel]="ticket.ticketStatus" (ngModelChange)="updateFieldValue($event)">
+                        <option *ngFor="let status of enumValues(TicketStatus)">{{status}}</option>
+                    </select>
                 </div>
             </div>
 <hr>
             <!--Developers assigned to ticket-->
             <div class="row">
-                <p class="h6">Devs Assigned</p>
+                <p class="h6">Devs Assigned <a (click)="toggleEditMode('devsAssigned')"><i class="fa fa-pencil fa-md"></i></a> <button *ngIf="editMode.devsAssigned" class="btn btn-outline-success btn-sm" (click)="updateSingleField('devsAssigned')">Update</button></p>
                 <div class="col" *ngFor="let developer of ticket.devsAssigned">{{developer.firstName}} {{developer.lastName}}</div>
+                    <select *ngIf="editMode.devsAssigned" [ngModel]="ticket.devsAssigned" (ngModelChange)="updateFieldValue($event)" multiple>
+                        <option *ngFor="let developer of devsAssigned" [value]="developer.id">{{developer.firstName}} {{developer.lastName}}</option>
+                    </select>
             </div>
             <hr> 
         </div>       

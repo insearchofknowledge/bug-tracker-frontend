@@ -36,7 +36,7 @@
             <div class="form-group">
                 <label>Devs Assigned:</label>
                 <select formControlName="devsAssigned" required multiple>
-                    <option *ngFor="let developer of projectTeam" [value]="developer.id"> {{developer.firstName}} {{developer.lastName}}</option>
+                    <option *ngFor="let developer of projectTeam" [value]="developer.id">{{developer.firstName}} {{developer.lastName}}</option>
                 </select>
             </div>
   

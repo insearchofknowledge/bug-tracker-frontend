@@ -5,6 +5,7 @@ import { TicketDetailed } from '../model/ticket/ticketDetailed';
 import { Observable } from 'rxjs';
 import { TicketSimplified } from '../model/ticket/ticketSimplified';
 import { AddTicket } from '../model/ticket/addTicket';
+import { UpdateTicketSingleField } from '../model/ticket/updateTicketSingleField';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,9 @@ export class TicketService {
 
   public fetchTicketsAssignedToDev(developerId :String): Observable<TicketSimplified[]> {
     return this.httpClient.get<TicketSimplified[]>(`${this.apiServerUrl}/api/tickets/assignedTo/${developerId}`);
+  }
+
+  public patchTicketSingleField(ticketId: string, singleFieldUpdateDto: UpdateTicketSingleField): Observable<TicketDetailed> {
+    return this.httpClient.patch<TicketDetailed>(`${this.apiServerUrl}/api/tickets/update/${ticketId}`, singleFieldUpdateDto);
   }
 }

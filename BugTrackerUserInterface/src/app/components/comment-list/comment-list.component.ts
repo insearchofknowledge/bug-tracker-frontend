@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { AddComment } from 'src/app/model/comment/addComment';
 import { Comment } from 'src/app/model/comment/comment';
 import { CommentService } from 'src/app/services/comment.service';
@@ -8,17 +8,33 @@ import { CommentService } from 'src/app/services/comment.service';
   templateUrl: './comment-list.component.html',
   styleUrls: ['./comment-list.component.css']
 })
-export class CommentListComponent implements OnInit {
+export class CommentListComponent implements OnInit, OnChanges {
 
   // it takes data from components we include this one in
   @Input() comments: Comment[];
   @Input() ticketId: String;
 
   commentContent: String;
+  sortedComments: Comment[];
 
   constructor(private commentService: CommentService) { }
 
   ngOnInit(): void {
+    this.sortCommentsByDatePosted();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['comments'] && this.comments) {
+      this.sortCommentsByDatePosted();
+    }
+  }
+
+  private sortCommentsByDatePosted(): void {
+    this.sortedComments = this.comments.sort((a, b) => {
+      const dateA = new Date(a.datePosted).getTime();
+      const dateB = new Date(b.datePosted).getTime();
+      return dateB - dateA;
+    });
   }
 
   onSubmit() {

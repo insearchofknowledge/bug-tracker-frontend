@@ -11,3 +11,8 @@ hr {
     font-size:small;
     font-weight: bold;
 }
+
+.head a, .head button {
+    margin-right: 4px;
+    margin-left: 4px;
+}

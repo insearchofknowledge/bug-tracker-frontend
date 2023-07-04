@@ -1,6 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DeveloperSimplified } from 'src/app/model/developer/developerSimplified';
+import { TicketPriority } from 'src/app/model/ticket/enums/ticketPriority';
+import { TicketStatus } from 'src/app/model/ticket/enums/ticketStatus';
+import { TypeOfTicket } from 'src/app/model/ticket/enums/typeOfTicket';
 import { TicketDetailed } from 'src/app/model/ticket/ticketDetailed';
+import { UpdateTicketSingleField } from 'src/app/model/ticket/updateTicketSingleField';
 import { SharedService } from 'src/app/services/shared.service';
 import { TicketService } from 'src/app/services/ticket.service';
 
@@ -13,8 +18,24 @@ export class TicketDetailComponent implements OnInit {
 
   public noTicketSelected: boolean = true;
   public ticket: TicketDetailed;
-  public errorMessage: String;
   public context: String;
+
+  public errorMessage: String;
+  
+  // the following fields are needed to update a single field of a ticket:
+  public dataOfSingleFieldUpdate: UpdateTicketSingleField;
+  public editMode = {
+    title: false,
+    description: false,
+    typeOfTicket: false,
+    ticketPriority: false,
+    ticketStatus: false,
+    devsAssigned: false
+  };
+  public TypeOfTicket = TypeOfTicket;
+  public TicketPriority = TicketPriority;
+  public TicketStatus = TicketStatus;
+  @Input() devsAssigned: DeveloperSimplified[];
 
   constructor(
     private ticketService: TicketService,
@@ -53,5 +74,46 @@ export class TicketDetailComponent implements OnInit {
         }
       }
     });
+  }
+
+
+  // toggling edit mode for a single field of a ticket
+  toggleEditMode(fieldKey: string) {
+    this.editMode[fieldKey] = !this.editMode[fieldKey];
+    console.log("toggleEditMode triggered ", fieldKey, ": ", this.editMode[fieldKey] );
+  }
+
+  // setting the value of the updateDto to the value defined by the user
+  updateFieldValue(newValue: TypeOfTicket | TicketPriority | TicketStatus | string | any | any[]) {
+    console.log("updateFieldValue triggered");
+    this.dataOfSingleFieldUpdate = new UpdateTicketSingleField();
+    if (this.editMode.devsAssigned) {
+      this.dataOfSingleFieldUpdate.fieldValue = newValue; // this comes as an array of strings by default so we must not use .toString()
+    } else {
+    this.dataOfSingleFieldUpdate.fieldValue = newValue.toString();
+    }
+    
+  }
+
+  updateSingleField(fieldName: string) {
+    console.log("updateSingleField triggered.....")
+    this.dataOfSingleFieldUpdate.fieldName = fieldName;
+    console.log("updateTIcketDto flield name: ", this.dataOfSingleFieldUpdate.fieldName);
+    const ticketId = this.ticket.id;
+    this.ticketService.patchTicketSingleField(ticketId, this.dataOfSingleFieldUpdate).subscribe({
+      next: (response ) => {
+        this.ticket = response;
+        this.editMode[fieldName] = false;
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        console.log(errorResponse);
+      }
+    })
+  }
+
+  // takes an enum object as an argument and returns an array of its string values. 
+  // We cast the Object.values(enumObject) result to string[] since enums can have numeric values as well.
+  public enumValues(enumObject: any): string[] {
+    return Object.values(enumObject) as string[];
   }
 }
